@@ -151,8 +151,8 @@ app.post("/create-payment", async (req, res) => {
         value: amount,
       },
       merchantAttributes: {
-        redirectUrl: "https://a2-expres.com/payment/success.html",
-        cancelUrl: "https://a2-expres.com/payment/cancel.html",
+        redirectUrl: "assmaexpress://payment-callback/success",
+        cancelUrl: "assmaexpress://payment-callback/cancel",
       },
       reference: orderId, // 🔑 Référence de la commande
     };
