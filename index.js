@@ -119,7 +119,7 @@ app.post("/create-payment", async (req, res) => {
       
       // Prix
       total: amount,
-      subtotal: subttotal || (amount - shippingCost),
+      subtotal: subtotal || (amount - shippingCost),
       shippingCost: shippingCost,
       tax: 0, // ← Ajoutez si applicable
       discount: 0, // ← Ajoutez si applicable
