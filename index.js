@@ -191,6 +191,9 @@ app.post("/create-payment", async (req, res) => {
 /* ========================
    🔔 NGenius WEBHOOK (CORRIGÉ)
 ======================== */
+/* ========================
+   🔔 NGenius WEBHOOK (CORRIGÉ)
+======================== */
 app.post(
   "/webhook/ngenius",
   express.raw({ type: "*/*" }),
@@ -212,11 +215,14 @@ app.post(
         .update(rawBody)
         .digest("hex");
 
-      if (signature !== expectedSignature) {
-        console.error("❌ Signature invalide");
-        console.log("Attendu:", expectedSignature);
-        console.log("Reçu:", signature);
-        return res.status(401).send("Invalid signature");
+      // 🔓 Désactivation temporaire de la vérification de signature (sandbox only)
+      if (NG_MODE !== "sandbox") {
+        if (signature !== expectedSignature) {
+          console.error("❌ Signature invalide");
+          console.log("Attendu:", expectedSignature);
+          console.log("Reçu:", signature);
+          return res.status(401).send("Invalid signature");
+        }
       }
 
       const payload = JSON.parse(rawBody);
